@@ -1,0 +1,28 @@
+<h2>Show engagement</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @engagement.name %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @engagement.location %>
+  </li>
+
+  <li>
+    <strong>Start date:</strong>
+    <%= @engagement.start_date %>
+  </li>
+
+  <li>
+    <strong>End date:</strong>
+    <%= @engagement.end_date %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: engagement_path(@conn, :edit, @engagement) %>
+<%= link "Back", to: engagement_path(@conn, :index) %>
