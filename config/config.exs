@@ -14,6 +14,15 @@ config :great_strides, GreatStrides.Endpoint,
   pubsub: [name: GreatStrides.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :ueberauth, Ueberauth,
+  providers: [
+    google: { Ueberauth.Strategy.Google, [] }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

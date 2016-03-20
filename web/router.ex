@@ -1,5 +1,6 @@
 defmodule GreatStrides.Router do
   use GreatStrides.Web, :router
+  require Ueberauth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,8 +14,17 @@ defmodule GreatStrides.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", GreatStrides do
+    pipe_through [:browser]
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+    delete "/logout", AuthController, :delete
+  end
+
   scope "/", GreatStrides do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser] # Use the default browser stack
 
     get "/", PageController, :index
     resources "/engagements", EngagementController

@@ -10,8 +10,8 @@ defmodule GreatStrides.Engagement do
     timestamps
   end
 
-  @required_fields ~w(name location start_date end_date)
-  @optional_fields ~w()
+  @required_fields ~w(name location)
+  @optional_fields ~w(start_date end_date)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
