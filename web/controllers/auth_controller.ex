@@ -1,5 +1,6 @@
 defmodule GreatStrides.AuthController do
   use GreatStrides.Web, :controller
+  require Logger
   plug Ueberauth
 
   alias Ueberauth.Strategy.Helpers
@@ -22,6 +23,7 @@ defmodule GreatStrides.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+    Logger.debug "LOGGING!"
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
