@@ -19,7 +19,7 @@ defmodule GreatStrides.Mixfile do
   def application do
     [mod: {GreatStrides, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ueberauth]]
+                    :phoenix_ecto, :postgrex, :ueberauth, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.

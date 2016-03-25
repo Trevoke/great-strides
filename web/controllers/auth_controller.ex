@@ -1,6 +1,5 @@
 defmodule GreatStrides.AuthController do
   use GreatStrides.Web, :controller
-  require Logger
   plug Ueberauth
 
   alias Ueberauth.Strategy.Helpers

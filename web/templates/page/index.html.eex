@@ -11,3 +11,5 @@ Hello, world!
     Sign in with Google
   </a>
 <% end %>
+
+<hr>
