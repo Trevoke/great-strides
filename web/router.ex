@@ -14,6 +14,12 @@ defmodule GreatStrides.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :mail do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+  end
+
   scope "/auth", GreatStrides do
     pipe_through [:browser]
 
@@ -26,8 +32,12 @@ defmodule GreatStrides.Router do
     pipe_through [:browser] # Use the default browser stack
 
     get "/", PageController, :index
-    post "/mail", MailController, :create
     resources "/engagements", EngagementController
+  end
+
+  scope "/mail", GreatStrides do
+    pipe_through :mail
+    post "/", MailController, :create
   end
 
   # Other scopes may use custom stacks.
