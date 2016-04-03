@@ -36,6 +36,7 @@ defmodule GreatStrides.Web do
 
       import GreatStrides.Router.Helpers
       import GreatStrides.Gettext
+      import GreatStrides.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +59,7 @@ defmodule GreatStrides.Web do
   def router do
     quote do
       use Phoenix.Router
+      import GreatStrides.Auth, only: [authenticate_user: 2]
     end
   end
 

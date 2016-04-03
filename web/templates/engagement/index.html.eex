@@ -20,13 +20,13 @@
       <td><%= engagement.end_date %></td>
 
       <td class="text-right">
-        <%= link "Show", to: engagement_path(@conn, :show, engagement), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: engagement_path(@conn, :edit, engagement), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: engagement_path(@conn, :delete, engagement), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: p_engagement_path(@conn, :show, engagement), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: p_engagement_path(@conn, :edit, engagement), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: p_engagement_path(@conn, :delete, engagement), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New engagement", to: engagement_path(@conn, :new) %>
+<%= link "New engagement", to: p_engagement_path(@conn, :new) %>

@@ -22,7 +22,7 @@ defmodule GreatStrides.EngagementController do
       {:ok, _engagement} ->
         conn
         |> put_flash(:info, "Engagement created successfully.")
-        |> redirect(to: engagement_path(conn, :index))
+        |> redirect(to: p_engagement_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -47,7 +47,7 @@ defmodule GreatStrides.EngagementController do
       {:ok, engagement} ->
         conn
         |> put_flash(:info, "Engagement updated successfully.")
-        |> redirect(to: engagement_path(conn, :show, engagement))
+        |> redirect(to: p_engagement_path(conn, :show, engagement))
       {:error, changeset} ->
         render(conn, "edit.html", engagement: engagement, changeset: changeset)
     end
@@ -62,6 +62,6 @@ defmodule GreatStrides.EngagementController do
 
     conn
     |> put_flash(:info, "Engagement deleted successfully.")
-    |> redirect(to: engagement_path(conn, :index))
+    |> redirect(to: p_engagement_path(conn, :index))
   end
 end

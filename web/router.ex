@@ -29,10 +29,16 @@ defmodule GreatStrides.Router do
   end
 
   scope "/", GreatStrides do
-    pipe_through [:browser] # Use the default browser stack
+    pipe_through [:browser]
 
     get "/", PageController, :index
+  end
+
+  scope "/p", GreatStrides, as: :p do
+    pipe_through [:browser, :authenticate_user]
+
     resources "/engagements", EngagementController
+    resources "/organizations", OrganizationController
   end
 
   scope "/mail", GreatStrides do
@@ -40,8 +46,4 @@ defmodule GreatStrides.Router do
     post "/", MailController, :create
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", GreatStrides do
-  #   pipe_through :api
-  # end
 end
