@@ -44,7 +44,7 @@ defmodule GreatStrides.AuthController do
 
     org = Repo.one query
     unless org do
-      [:ok, org] = Repo.insert(%Organization{domain: domain})
+      [:ok, org] = Repo.insert(%Organization{domain: ^domain})
     end
 
     query = from u in User,
@@ -52,8 +52,8 @@ defmodule GreatStrides.AuthController do
 
     user = Repo.one(query)
     unless user do
-      [:ok, _user] = Repo.insert(%User{username: authed_user.email,
-                                       organization_id: org.id})
+      [:ok, _user] = Repo.insert(%User{username: ^authed_user.email,
+                                       organization_id: ^org.id})
     end
     conn
   end
