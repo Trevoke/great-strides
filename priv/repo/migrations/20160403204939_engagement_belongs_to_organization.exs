@@ -3,7 +3,7 @@ defmodule GreatStrides.Repo.Migrations.EngagementBelongsToOrganization do
 
   def change do
     alter table :organizations do
-      add :engagement_id, references(:engagement, on_delete: :nothing)
+      add :engagement_id, references(:engagements, on_delete: :nothing)
     end
   end
 end
