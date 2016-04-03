@@ -44,22 +44,15 @@ defmodule GreatStrides.AuthController do
 
     org = Repo.one(query)
     unless org do
-      changeset = Organization.changeset(
-        %Organization{},
-        %{domain: domain})
-      org = Repo.insert(Organization, changeset)
+      org = Repo.insert(%Organization{domain: domain})
     end
 
     query = from u in User,
     where: u.username == ^authed_user.email
     user = Repo.one(query)
     unless user do
-      user_changeset = User.changeset(
-        %User{},
-        %{username: authed_user.email,
-          organization_id: org.id
-         })
-      Repo.insert(User, user_changeset)
+      Repo.insert(%User{username: authed_user.email,
+                        organization_id: org.id})
     end
     conn
   end
