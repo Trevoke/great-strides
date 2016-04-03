@@ -38,7 +38,7 @@ defmodule GreatStrides.AuthController do
   end
 
   defp ensure_db_entries_exist(conn, authed_user) do
-    {_, domain} = String.split(authed_user.email, "@")
+    [_, domain] = String.split(authed_user.email, "@")
     query = from org in Organization,
     where: org.domain == ^domain
 
