@@ -4,10 +4,9 @@ defmodule GreatStrides.MailController do
   require IEx
 
   def create(conn, params) do
-    IEx.pry
-    Logger.info params[:message]
-    Logger.info "----------"
-    Logger.info params[:body_params]
+    foo = "#{params["headers"]["Subject"]}"
+    bar = "#{params["reply_plain"]}"
+    Logger.info "\n#{foo}\n#{bar}"
     render conn, :ok
   end
 end
