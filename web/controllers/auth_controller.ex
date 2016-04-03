@@ -3,6 +3,7 @@ defmodule GreatStrides.AuthController do
   plug Ueberauth
 
   alias Ueberauth.Strategy.Helpers
+  require Logger
 
   def request(conn, _params) do
     render(conn, "request.html", callback_url: Helpers.callback_url(conn))
@@ -22,6 +23,7 @@ defmodule GreatStrides.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+    Logger.info auth
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
         conn
