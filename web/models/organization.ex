@@ -1,18 +1,15 @@
-defmodule GreatStrides.Engagement do
+defmodule GreatStrides.Organization do
   use GreatStrides.Web, :model
 
-  schema "engagements" do
-    field :name, :string
-    field :location, :string
-    field :start_date, Ecto.Date
-    field :end_date, Ecto.Date
+  schema "organizations" do
+    field :domain, :string
+    has_many :engagements, GreatStrides.Engagement
     has_many :users, GreatStrides.User
-
     timestamps
   end
 
-  @required_fields ~w(name location)
-  @optional_fields ~w(start_date end_date)
+  @required_fields ~w(domain)
+  @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -23,6 +20,6 @@ defmodule GreatStrides.Engagement do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> unique_constraint(:name)
+    |> unique_constraint(:domain)
   end
 end

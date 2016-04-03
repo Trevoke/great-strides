@@ -1,0 +1,26 @@
+<h2>Listing organizations</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Domain</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for organization <- @organizations do %>
+    <tr>
+      <td><%= organization.domain %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: p_organization_path(@conn, :show, organization), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: p_organization_path(@conn, :edit, organization), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: p_organization_path(@conn, :delete, organization), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New organization", to: p_organization_path(@conn, :new) %>

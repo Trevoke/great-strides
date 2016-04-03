@@ -1,0 +1,13 @@
+<h2>Show organization</h2>
+
+<ul>
+
+  <li>
+    <strong>Domain:</strong>
+    <%= @organization.domain %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: p_organization_path(@conn, :edit, @organization) %>
+<%= link "Back", to: p_organization_path(@conn, :index) %>
