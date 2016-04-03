@@ -3,7 +3,8 @@ defmodule GreatStrides.AuthController do
   plug Ueberauth
 
   alias Ueberauth.Strategy.Helpers
-  require Logger
+  alias GreatStrides.Organization
+  alias GreatStrides.User
 
   def request(conn, _params) do
     render(conn, "request.html", callback_url: Helpers.callback_url(conn))
@@ -23,10 +24,9 @@ defmodule GreatStrides.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    Logger.info auth
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
-        conn
+        ensure_db_entries_exist(conn, user)
         |> put_flash(:info, "Successfully authenticated.")
         |> put_session(:current_user, user)
         |> redirect(to: "/")
@@ -35,5 +35,32 @@ defmodule GreatStrides.AuthController do
         |> put_flash(:error, reason)
         |> redirect(to: "/")
     end
+  end
+
+  defp ensure_db_entries_exist(conn, authed_user) do
+    {_, domain} = String.split(authed_user.email)
+    query = from org in Organization,
+    where: org.domain == ^domain
+
+    org = Repo.one(query)
+    unless org do
+      changeset = Organization.changeset(
+        %Organization{},
+        %{domain: domain})
+      org = Repo.insert(Organization, changeset)
+    end
+
+    query = from u in User,
+    where: u.username == ^authed_user.email
+    user = Repo.one(query)
+    unless user do
+      user_changeset = User.changeset(
+        %User{},
+        %{username: authed_user.email,
+          organization_id: org.id
+         })
+      Repo.insert(User, user_changeset)
+    end
+    conn
   end
 end

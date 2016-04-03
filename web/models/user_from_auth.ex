@@ -18,7 +18,10 @@ defmodule UserFromAuth do
   end
 
   defp basic_info(auth) do
-    %{id: auth.uid, name: name_from_auth(auth), avatar: auth.info.image}
+    %{id: auth.uid,
+      name: name_from_auth(auth),
+      avatar: auth.info.image,
+      email: auth.info.email}
   end
 
   defp name_from_auth(auth) do
