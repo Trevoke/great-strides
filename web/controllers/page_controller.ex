@@ -2,7 +2,7 @@ defmodule GreatStrides.PageController do
   use GreatStrides.Web, :controller
 
 
-  def index(%{assigns: %{current_user: user}} = conn, _params) do
+  def index(%{assigns: %{current_user: current_user}} = conn, _params) do
     conn
     |> redirect(to: p_organization_path(conn, :show, current_user.organization_id))
   end
