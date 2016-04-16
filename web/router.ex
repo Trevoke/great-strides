@@ -23,6 +23,7 @@ defmodule GreatStrides.Router do
   scope "/auth", GreatStrides do
     pipe_through [:browser]
 
+    get "/", AuthController, :index
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
     delete "/logout", AuthController, :delete

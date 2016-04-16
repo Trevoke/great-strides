@@ -1,0 +1,12 @@
+DEV LOGIN
+
+<hr>
+
+<form method="get" action="/auth/dev/callback">
+  <label>Who do you want to be today?
+    <input type="ueberauth_auth[]email" name="email"/>
+  </label>
+  <input type="submit">
+</form>
+
+<hr>

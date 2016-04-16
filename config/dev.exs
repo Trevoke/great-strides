@@ -24,6 +24,8 @@ config :great_strides, GreatStrides.Endpoint,
     ]
   ]
 
+config :great_strides, login_method: :form
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
