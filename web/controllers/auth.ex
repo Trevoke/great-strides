@@ -2,6 +2,7 @@ defmodule GreatStrides.Auth do
   import Phoenix.Controller
   import Plug.Conn
   alias GreatStrides.Router.Helpers
+  require Logger
 
   def init(opts) do
     Keyword.fetch!(opts, :repo)
@@ -9,6 +10,7 @@ defmodule GreatStrides.Auth do
 
   def call(conn, repo) do
     user_id = get_session(conn, :user_id)
+    Logger.info "INSIDE AUTH #{user_id}"
 
     cond do
       user = conn.assigns[:current_user] -> conn
