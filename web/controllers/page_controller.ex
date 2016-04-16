@@ -6,7 +6,7 @@ defmodule GreatStrides.PageController do
   def index(conn, _params) do
     user = get_session(conn, :user_id)
     Logger.info "INSIDE / #{user}"
-    if user_id do
+    if user do
       conn
       |> redirect(to: p_organization_path(conn, :show, 1))
     else
