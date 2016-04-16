@@ -37,6 +37,7 @@ defmodule GreatStrides.AuthController do
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
+        Logger.info "INSIDE CALLBACK #{user_id}"
         conn
         |> put_flash(:info, "Successfully authenticated.")
         |> assign(:current_user, user)
