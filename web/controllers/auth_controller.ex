@@ -51,7 +51,7 @@ defmodule GreatStrides.AuthController do
   def callback(conn, %{"provider" => "dev"} = params) do
     IEx.pry
     conn
-    |> redirect to: "/"
+    |> redirect(to: "/")
   end
 
 end
