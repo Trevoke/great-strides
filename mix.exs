@@ -4,7 +4,7 @@ defmodule GreatStrides.Mixfile do
   def project do
     [app: :great_strides,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule GreatStrides.Mixfile do
   def application do
     [mod: {GreatStrides, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_google]]
+                    :phoenix_ecto, :postgrex, :oauth, :ueberauth, :ueberauth_google]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,6 +38,7 @@ defmodule GreatStrides.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.9"},
       {:cowboy, "~> 1.0"},
+      {:oauth, github: "tim/erlang-oauth"},
       {:ueberauth, "~> 0.2"},
       {:ueberauth_google, "~> 0.1.0"},
       {:mail, "~> 0.0.4"}

@@ -14,6 +14,7 @@
   "metrics": {:hex, :metrics, "1.0.1"},
   "mimerl": {:hex, :mimerl, "1.0.2"},
   "mimetype_parser": {:hex, :mimetype_parser, "0.1.2"},
+  "oauth": {:git, "https://github.com/tim/erlang-oauth.git", "fca8163e8f7af867015e2413c4b03a4f8f4df0c9", []},
   "oauth2": {:hex, :oauth2, "0.6.0"},
   "phoenix": {:hex, :phoenix, "1.1.4"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "2.0.1"},
