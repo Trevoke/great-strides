@@ -40,7 +40,7 @@ defmodule GreatStrides.Mixfile do
       {:cowboy, "~> 1.0"},
       {:oauth, github: "tim/erlang-oauth"},
       {:ueberauth, "~> 0.2"},
-      {:ueberauth_google, "~> 0.1.0"},
+      {:ueberauth_google, "~> 0.2"},
       {:mail, "~> 0.0.4"}
     ]
   end
