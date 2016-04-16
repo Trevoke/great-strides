@@ -16,12 +16,7 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <%= if @current_user do %>
-            <h2>Welcome, <%= @current_user.name %>!</h2>
-            <img src="<%= @current_user.avatar %>" class="img-circle"/>
-            <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
-            <br>
-            <% end %>
+            <li>Goodness Gracious Great Strides on Fire</li>
           </ul>
         </nav>
         <span class="logo"></span>
