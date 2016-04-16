@@ -39,7 +39,7 @@ defmodule GreatStrides.AuthController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Successfully authenticated.")
-        |> put_session(:current_user, user)
+        |> assign(:current_user, user)
         |> put_session(:user_id, user.id)
         |> redirect(to: "/")
       {:error, reason} ->
