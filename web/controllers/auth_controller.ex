@@ -25,13 +25,13 @@ defmodule GreatStrides.AuthController do
     conn
     |> put_flash(:info, "You have been logged out!")
     |> configure_session(drop: true)
-    |> redirect(to: "/")
+    |> redirect(to: page_path(conn, :index))
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
     |> put_flash(:error, "Failed to authenticate.")
-    |> redirect(to: "/")
+    |> redirect(to: page_path(conn, :index))
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
@@ -41,18 +41,18 @@ defmodule GreatStrides.AuthController do
         |> put_flash(:info, "Successfully authenticated.")
         |> assign(:current_user, user)
         |> put_session(:user_id, user.id)
-        |> redirect(to: "/")
+        |> redirect(to: page_path(conn, :index))
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
-        |> redirect(to: "/")
+        |> redirect(to: page_path(conn, :index))
     end
   end
 
   def callback(conn, %{"provider" => "dev"} = params) do
     IEx.pry
     conn
-    |> redirect(to: "/")
+    |> redirect(to: page_path(conn, :index))
   end
 
 end
