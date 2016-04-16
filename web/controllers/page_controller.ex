@@ -6,7 +6,7 @@ defmodule GreatStrides.PageController do
     if user do
       conn
       |> redirect(to: p_organization_path(conn, :show, user.organization_id))
-    else do
+    else
       conn
       |> redirect(to: auth_path(conn, :index))
     end
