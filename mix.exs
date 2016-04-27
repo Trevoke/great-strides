@@ -18,9 +18,13 @@ defmodule GreatStrides.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {GreatStrides, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :oauth, :ueberauth_google]]
+     applications: app_list(Mix.env)]
   end
+
+  defp app_list(:dev), do: [:ueberauth_identity, :faker | app_list()]
+  defp app_list(_), do: app_list()
+  defp app_list(), do:  [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+                         :phoenix_ecto, :postgrex, :oauth, :ueberauth_google]
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
@@ -41,7 +45,9 @@ defmodule GreatStrides.Mixfile do
       {:oauth, github: "tim/erlang-oauth"},
       {:ueberauth, "~> 0.2"},
       {:ueberauth_google, "~> 0.2"},
-      {:mail, "~> 0.0.4"}
+      {:mail, "~> 0.0.4"},
+      {:ueberauth_identity, "~> 0.2", only: :dev},
+      {:faker, "~> 0.5", only: [:dev, :test]}
     ]
   end
 

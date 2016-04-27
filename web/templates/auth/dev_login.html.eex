@@ -2,10 +2,15 @@ DEV LOGIN
 
 <hr>
 
-<form method="get" action="/auth/dev/callback">
+<form method="get" action="/auth/identity/callback">
   <label>Who do you want to be today?
-    <input type="ueberauth_auth[]email" name="email"/>
+    <input name="user[email]" type="email"/>
   </label>
+  <label>Name:
+    <input type="text" name="user[name]" value="<%= Faker.Name.name %>"></input>
+  </label>
+  <label>Icon:
+  <input type="url" name="user[image]" value="https://38.media.tumblr.com/0fd125c8305bd5db41764d4358a490b3/tumblr_nslilh8JCx1u0rseao3_r1_540.gif"></input>
   <input type="submit">
 </form>
 

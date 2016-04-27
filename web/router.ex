@@ -26,6 +26,7 @@ defmodule GreatStrides.Router do
 
     get "/", AuthController, :index
     get "/:provider", AuthController, :request
+    get "/identity/callback", AuthController, :identity_callback
     get "/:provider/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
   end

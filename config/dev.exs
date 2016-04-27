@@ -24,6 +24,11 @@ config :great_strides, GreatStrides.Endpoint,
     ]
   ]
 
+config :ueberauth, Ueberauth,
+  providers: [
+    identity: {Ueberauth.Strategy.Identity, [param_nesting: "user"]}
+  ]
+
 config :great_strides, login_method: :form
 
 # Do not include metadata nor timestamps in development logs

@@ -50,10 +50,21 @@ defmodule GreatStrides.AuthController do
     end
   end
 
-  def callback(conn, %{"provider" => "dev"} = params) do
-    IEx.pry
-    conn
-    |> redirect(to: page_path(conn, :index))
+  def identity_callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+#    IEx.pry
+    case UserFromAuth.find_or_create(auth) do
+      {:ok, user} ->
+        Logger.info "INSIDE CALLBACK #{user.id}"
+        conn
+        |> put_flash(:info, "Successfully authenticated.")
+        |> assign(:current_user, user)
+        |> put_session(:user_id, user.id)
+        |> redirect(to: page_path(conn, :index))
+      {:error, reason} ->
+        conn
+        |> put_flash(:error, reason)
+        |> redirect(to: page_path(conn, :index))
+    end
   end
 
 end
