@@ -1,6 +1,5 @@
 defmodule GreatStrides.MailController do
   use GreatStrides.Web, :controller
-  require Logger
 
   def create(conn, params) do
     foo = params["headers"]["Subject"]

@@ -3,9 +3,6 @@ defmodule GreatStrides.AuthController do
   plug Ueberauth
   alias Ueberauth.Strategy.Helpers
 
-  require IEx
-  require Logger
-
   @login_method Application.get_env(:great_strides, :login_method)
 
   def index(conn, _params) when @login_method == :form do
@@ -35,9 +32,16 @@ defmodule GreatStrides.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+    handle_successful_login(conn, auth)
+  end
+
+  def identity_callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+    handle_successful_login(conn, auth)
+  end
+
+  defp handle_successful_login(conn, auth) do
     case UserFromAuth.find_or_create(auth) do
       {:ok, user} ->
-        Logger.info "INSIDE CALLBACK #{user.id}"
         conn
         |> put_flash(:info, "Successfully authenticated.")
         |> assign(:current_user, user)
@@ -50,21 +54,5 @@ defmodule GreatStrides.AuthController do
     end
   end
 
-  def identity_callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-#    IEx.pry
-    case UserFromAuth.find_or_create(auth) do
-      {:ok, user} ->
-        Logger.info "INSIDE CALLBACK #{user.id}"
-        conn
-        |> put_flash(:info, "Successfully authenticated.")
-        |> assign(:current_user, user)
-        |> put_session(:user_id, user.id)
-        |> redirect(to: page_path(conn, :index))
-      {:error, reason} ->
-        conn
-        |> put_flash(:error, reason)
-        |> redirect(to: page_path(conn, :index))
-    end
-  end
 
 end
