@@ -1,19 +1,35 @@
 <%= if @current_user do %>
-  <h2>Welcome, <%= @current_user.username %>!</h2>
-  <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
-  <br>
+  <ul style="display: inline-block;">
+    <li style="display: inline-block;">
+      <h4>Welcome, <%= @current_user.username %>!</h4>
+    </li>
+    <li style="display: inline-block;">
+      <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+    </li>
+</ul>
 <% end %>
 
-<h2>Show organization</h2>
+<h2>Organization: <%= @organization.domain %></h2>
 
-<ul>
+<%= form_for @new_engagement, p_engagement_path(@conn, :create), fn f -> %>
+  <%= hidden_input f, :organization_id, value: @new_engagement.model.organization_id %>
+  <div class=  "form-group"  >
+    <%= text_input f, :name, placeholder: "  Engagement name"   %>
+    <%= submit "    Add new engagement", class: "    btn btn-primary" %>
+  </div>
 
-  <li>
-    <strong>Domain:</strong>
-    <%= @organization.domain %>
-  </li>
+<% end %>
 
+
+<ul>Engagements:
+<%= for engagement <- @organization.engagements do %>
+    <li>
+      <%= link engagement.name, to: p_engagement_path(@conn, :show, engagement.id) %>
+    </li>
+  <% end %>
 </ul>
+
+
 
 <%= link "Edit", to: p_organization_path(@conn, :edit, @organization) %>
 <%= link "Back", to: p_organization_path(@conn, :index) %>

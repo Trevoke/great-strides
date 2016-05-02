@@ -30,6 +30,7 @@ defmodule GreatStrides.EngagementController do
 
   def show(conn, %{"id" => id}) do
     engagement = Repo.get!(Engagement, id)
+    engagement = Repo.preload engagement, [:organization, :users]
     render(conn, "show.html", engagement: engagement)
   end
 

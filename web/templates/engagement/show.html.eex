@@ -1,4 +1,7 @@
-<h2>Show engagement</h2>
+<h2>
+  Show engagement
+  <%= link "Back to  #{@engagement.organization.domain}", to: p_organization_path(@conn, :show, @engagement.organization), class: "btn btn-default btn-m" %>
+</h2>
 
 <ul>
 
@@ -23,6 +26,15 @@
   </li>
 
 </ul>
+
+<ul>People there:
+<%= for user <- @engagement.users do %>
+    <li>
+      <%= user.name %>
+    </li>
+  <% end %>
+</ul>
+
 
 <%= link "Edit", to: p_engagement_path(@conn, :edit, @engagement) %>
 <%= link "Back", to: p_engagement_path(@conn, :index) %>

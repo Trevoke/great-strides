@@ -2,6 +2,7 @@ defmodule GreatStrides.OrganizationController do
   use GreatStrides.Web, :controller
 
   alias GreatStrides.Organization
+  alias GreatStrides.Engagement
 
   plug :scrub_params, "organization" when action in [:create, :update]
 
@@ -29,8 +30,11 @@ defmodule GreatStrides.OrganizationController do
   end
 
   def show(conn, %{"id" => id}) do
-    organization = Repo.get!(Organization, id)
-    render(conn, "show.html", organization: organization)
+    organization = Repo.get!(Organization, id, preload: [:engagements])
+    organization = Repo.preload organization, :engagements
+    new_engagement = Engagement.changeset(%Engagement{organization_id: id})
+    conn
+    |> render("show.html", organization: organization, new_engagement: new_engagement)
   end
 
   def edit(conn, %{"id" => id}) do

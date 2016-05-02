@@ -10,6 +10,6 @@ defmodule GreatStrides.Repo.Migrations.CreateEngagement do
 
       timestamps
     end
-
+    create unique_index(:engagements, [:name, :start_date])
   end
 end

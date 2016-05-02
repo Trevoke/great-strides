@@ -7,12 +7,13 @@ defmodule GreatStrides.Engagement do
     field :start_date, Ecto.Date
     field :end_date, Ecto.Date
     has_many :users, GreatStrides.User
+    belongs_to :organization, GreatStrides.Organization
 
     timestamps
   end
 
-  @required_fields ~w(name location)
-  @optional_fields ~w(start_date end_date)
+  @required_fields ~w(name organization_id)
+  @optional_fields ~w(start_date end_date location)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
