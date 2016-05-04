@@ -30,7 +30,7 @@
 <ul>People there:
 <%= for user <- @engagement.users do %>
     <li>
-      <%= user.name %>
+      <%= user.username %>
     </li>
   <% end %>
 </ul>
