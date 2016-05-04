@@ -42,6 +42,7 @@ defmodule GreatStrides.Router do
 
     resources "/engagements", EngagementController
     resources "/organizations", OrganizationController
+    post "/assign/:org_id", UserController, :update_engagement
   end
 
   scope "/mail", GreatStrides do

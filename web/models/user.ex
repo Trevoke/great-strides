@@ -9,7 +9,7 @@ defmodule GreatStrides.User do
   end
 
   @required_fields ~w(username)
-  @optional_fields ~w()
+  @optional_fields ~w(engagement_id organization_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

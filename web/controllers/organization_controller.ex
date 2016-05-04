@@ -3,6 +3,7 @@ defmodule GreatStrides.OrganizationController do
 
   alias GreatStrides.Organization
   alias GreatStrides.Engagement
+  alias GreatStrides.User
 
   plug :scrub_params, "organization" when action in [:create, :update]
 
@@ -30,11 +31,19 @@ defmodule GreatStrides.OrganizationController do
   end
 
   def show(conn, %{"id" => id}) do
-    organization = Repo.get!(Organization, id, preload: [:engagements])
-    organization = Repo.preload organization, :engagements
+    organization = Repo.one from o in Organization,
+      where: o.id == ^id,
+      preload: [:engagements, engagements: :users]
+    users = Repo.all from u in User,
+      where: u.organization_id == ^id
+    new_user_assignment = User.changeset(%User{})
     new_engagement = Engagement.changeset(%Engagement{organization_id: id})
     conn
-    |> render("show.html", organization: organization, new_engagement: new_engagement)
+    |> render("show.html",
+    organization: organization,
+    users: users,
+    new_engagement: new_engagement,
+    new_user_assignment: new_user_assignment)
   end
 
   def edit(conn, %{"id" => id}) do
