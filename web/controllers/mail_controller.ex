@@ -16,7 +16,7 @@ defmodule GreatStrides.MailController do
     date = params["headers"]["Date"]
 
     user = Repo.one from u in User, where: u.username == ^author
-    if user and user.engagement_id do
+    if user && user.engagement_id do
       diary_changeset = Diary.changeset(
         %Diary{
           date: date,
