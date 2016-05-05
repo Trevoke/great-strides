@@ -6,6 +6,9 @@
     <li style="display: inline-block;">
       <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
     </li>
+    <li>
+        Once you join an engagement, you can update the engagement diary by sending an email to e448577c412a059d1937@cloudmailin.net . Have fun.
+    </li>
 </ul>
 <% end %>
 
