@@ -8,7 +8,11 @@ defmodule GreatStrides.MailController do
   require Logger
 
   def create(conn, params) do
+    email_regex = ~r/^.*?<?(\w+@\w+\.\w+)>?$/
     author = params["headers"]["From"]
+    usable_author = Enum.at(
+      Regex.run(email_regex, author) || "",
+      0, "")
     Logger.info author
     header = params["headers"]["Subject"]
     body = if(String.length(params["reply_plain"]) == 0) do
@@ -18,7 +22,7 @@ defmodule GreatStrides.MailController do
     end
     date = params["headers"]["Date"]
 
-    user = Repo.one from u in User, where: u.username == ^author
+    user = Repo.one from u in User, where: u.username == ^usable_author
     if user && user.engagement_id do
       diary_changeset = Diary.changeset(
         %Diary{
