@@ -14,6 +14,7 @@ defmodule GreatStrides.MailController do
       Regex.run(email_regex, author) || "",
       0, "")
     Logger.info author
+    Logger.info usable_author
     header = params["headers"]["Subject"]
     body = if(String.length(params["reply_plain"]) == 0) do
       params["plain"]
