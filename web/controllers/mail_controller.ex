@@ -5,8 +5,11 @@ defmodule GreatStrides.MailController do
   alias GreatStrides.User
   alias GreatStrides.Diary
 
+  require Logger
+
   def create(conn, params) do
     author = params["headers"]["From"]
+    Logger.info author
     header = params["headers"]["Subject"]
     body = if(String.length(params["reply_plain"]) == 0) do
       params["plain"]
