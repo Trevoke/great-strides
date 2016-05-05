@@ -1,15 +1,14 @@
 defmodule GreatStrides.Diary do
   use GreatStrides.Web, :model
 
-  schema "users" do
-    field :date, Ecto.Date
+  schema "diaries" do
     field :entry, :string
     belongs_to :user, GreatStrides.User
     belongs_to :engagement, GreatStrides.Engagement
     timestamps
   end
 
-  @required_fields ~w(date user engagement)
+  @required_fields ~w(entry user_id engagement_id)
   @optional_fields ~w()
 
   @doc """
