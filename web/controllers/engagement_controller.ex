@@ -35,8 +35,6 @@ defmodule GreatStrides.EngagementController do
       where: e.id == ^id,
       preload: [diaries: ^diary_query],
       preload: [:organization, :users]
-    # engagement = Repo.get!(Engagement, id)
-    # engagement = Repo.preload engagement, [:organization, :users]
     render(conn, "show.html", engagement: engagement)
   end
 
