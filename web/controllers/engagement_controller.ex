@@ -2,6 +2,7 @@ defmodule GreatStrides.EngagementController do
   use GreatStrides.Web, :controller
 
   alias GreatStrides.Engagement
+  alias GreatStrides.Diary
 
   plug :scrub_params, "engagement" when action in [:create, :update]
 
@@ -29,8 +30,13 @@ defmodule GreatStrides.EngagementController do
   end
 
   def show(conn, %{"id" => id}) do
-    engagement = Repo.get!(Engagement, id)
-    engagement = Repo.preload engagement, [:organization, :users]
+    diary_query = from d in Diary, order_by: [desc: d.inserted_at]
+    engagement = Repo.one from e in Engagement,
+      where: e.id == ^id,
+      preload: [diaries: ^diary_query],
+      preload: [:organization, :users]
+    # engagement = Repo.get!(Engagement, id)
+    # engagement = Repo.preload engagement, [:organization, :users]
     render(conn, "show.html", engagement: engagement)
   end
 

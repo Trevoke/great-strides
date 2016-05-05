@@ -7,6 +7,7 @@ defmodule GreatStrides.Engagement do
     field :start_date, Ecto.Date
     field :end_date, Ecto.Date
     has_many :users, GreatStrides.User
+    has_many :diaries, GreatStrides.Diary
     belongs_to :organization, GreatStrides.Organization
 
     timestamps
