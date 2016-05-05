@@ -24,7 +24,7 @@ defmodule GreatStrides.MailController do
           user_id: user.id,
           engagement_id: user.engagement_id
         })
-      Repo.insert(changeset)
+      Repo.insert(diary_changeset)
     end
 
     render conn, :ok
