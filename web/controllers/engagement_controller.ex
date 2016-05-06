@@ -20,10 +20,10 @@ defmodule GreatStrides.EngagementController do
     changeset = Engagement.changeset(%Engagement{}, engagement_params)
 
     case Repo.insert(changeset) do
-      {:ok, _engagement} ->
+      {:ok, engagement} ->
         conn
         |> put_flash(:info, "Engagement created successfully.")
-        |> redirect(to: p_engagement_path(conn, :index))
+        |> redirect(to: p_organization_path(conn, :show, engagement.organization_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
