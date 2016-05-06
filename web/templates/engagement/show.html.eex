@@ -38,10 +38,12 @@
 <h2>Diary</h2>
 <section>
     <%= for diary <- @engagement.diaries do %>
+
         <article>
             <header><%= diary.inserted_at %></header>
-            <%= diary.entry %>
+            <%= raw String.replace diary.entry, "\n", "<br />" %>
         </article>
+        <hr />
     <% end %>
 </section>
 
